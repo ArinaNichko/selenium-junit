@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Alert and Popup" >
-    <test name="Alert and popup tests">
-        <classes>
-            <class name="testCases.popupAndAlert.PopupAndAlertsTests"/>
-        </classes>
-    </test>
-</suite>

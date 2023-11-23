@@ -1,17 +1,20 @@
 package testCases.accordionItems;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.AccordionItemsPage;
 import base.BaseTest;
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import pages.AccordionItemsPage;
 
 import java.util.List;
 
+@ExtendWith(ReportPortalExtension.class)
 public class AccordionItemsTests extends BaseTest {
   private static AccordionItemsPage accordionItemsPage;
 
-  @BeforeMethod
+  @BeforeEach
   public void setAccordionItemsPage() {
     accordionItemsPage = pageFactoryManager.getPage(AccordionItemsPage.class);
   }
@@ -27,7 +30,7 @@ public class AccordionItemsTests extends BaseTest {
     accordionItemsPage.waitVisibilityOfLoadText("LOADING COMPLETE.");
     accordionItemsPage.clickOnKeepClickingItem();
 
-    Assert.assertEquals(accordionItemsPage.getKeepClickingItemText(),
+    Assertions.assertEquals(accordionItemsPage.getKeepClickingItemText(),
             "This text has appeared after 5 seconds!");
   }
 
@@ -42,6 +45,7 @@ public class AccordionItemsTests extends BaseTest {
     accordionItemsPage.implicitWait(timeout);
     accordionItemsPage.clickOnManualTestingItem();
 
-    Assert.assertTrue(accordionItemsPage.getManualTestingItemText().contains("Manual testing has for some time"));
+    Assertions.assertTrue(accordionItemsPage.getManualTestingItemText()
+            .contains("Manual testing has for some time"));
   }
 }

@@ -3,22 +3,18 @@ package cucumber.setUp;
 import manager.PageFactoryManager;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Listeners;
 import pages.ActionsPage;
 import pages.HomePage;
 import pages.LoginPortalPage;
 import pages.OptionsPage;
-import reporting.TestListener;
 import utils.PropertiesHelper;
 import webDriverFactory.LocalWebDriverCreator;
 import webDriverFactory.RemoteWebDriverCreator;
 import webDriverFactory.WebDriverCreator;
 
-
 import static java.util.Optional.ofNullable;
 import static utils.PropertiesHelper.getInstance;
 
-@Listeners({TestListener.class})
 public class CucumberContext {
   protected static PropertiesHelper propertiesHelper = getInstance();
   public final int FIRST = 1;

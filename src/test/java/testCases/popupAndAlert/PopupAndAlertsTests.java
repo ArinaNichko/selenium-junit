@@ -1,18 +1,21 @@
 package testCases.popupAndAlert;
 
-import org.openqa.selenium.Alert;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.PopupAndAlertsPage;
 import base.BaseTest;
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.Alert;
+import pages.PopupAndAlertsPage;
 
 import java.util.List;
 
+@ExtendWith(ReportPortalExtension.class)
 public class PopupAndAlertsTests extends BaseTest {
   private static PopupAndAlertsPage popupAndAlertsPage;
 
-  @BeforeMethod
+  @BeforeEach
   public void setPopupAndAlertsPage() {
     popupAndAlertsPage = pageFactoryManager.getPage(PopupAndAlertsPage.class);
   }
@@ -33,7 +36,7 @@ public class PopupAndAlertsTests extends BaseTest {
 
     popupAndAlertsPage.acceptAlert(alert);
 
-    Assert.assertEquals(getAlertMessage, "I am an alert box!");
+    Assertions.assertEquals(getAlertMessage, "I am an alert box!");
   }
 
   @Test
@@ -52,7 +55,7 @@ public class PopupAndAlertsTests extends BaseTest {
 
     popupAndAlertsPage.clickOnClosePopupButton();
 
-    Assert.assertEquals(popupTitle,
+    Assertions.assertEquals(popupTitle,
             "It’s that Easy!! Well I think it is.....");
   }
 }

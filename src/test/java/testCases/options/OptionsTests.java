@@ -1,27 +1,30 @@
 package testCases.options;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.OptionsPage;
 import base.BaseTest;
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import pages.OptionsPage;
 
 import java.util.List;
 
+@ExtendWith(ReportPortalExtension.class)
 public class OptionsTests extends BaseTest {
   private static OptionsPage optionsPage;
-  private static String selectOption;
-  private static String expectedResult;
+  private final String DROPDOWN_TEST_DATA = "/testData/dropdownMenuTestData.csv";
 
-  @BeforeMethod
+  @BeforeEach
   public void setOptionsPage() {
     optionsPage = pageFactoryManager.getPage(OptionsPage.class);
-    selectOption = propertiesHelper.getProperty("selectOption");
-    expectedResult = propertiesHelper.getProperty("expectedResult");
   }
 
-  @Test
-  public void checkJavaDropdownMenu() {
+  @ParameterizedTest
+  @CsvFileSource(resources = DROPDOWN_TEST_DATA, numLinesToSkip = 1)
+  public void checkJavaDropdownMenu(String option, String expectedResult) {
     homePage.openHomePage(baseUrl);
     homePage.clickOnOptionsLink();
 
@@ -29,9 +32,9 @@ public class OptionsTests extends BaseTest {
     homePage.switchToTab(newTab.get(FIRST));
 
     optionsPage.implicitWait(timeout);
-    optionsPage.selectOption(selectOption);
+    optionsPage.selectOption(option);
 
-    Assert.assertEquals(optionsPage.getSelectedOptionText(), expectedResult);
+    Assertions.assertEquals(optionsPage.getSelectedOptionText(), expectedResult);
   }
 
   @Test
@@ -49,7 +52,7 @@ public class OptionsTests extends BaseTest {
     optionsPage.waitVisibilityOfTestngOption();
     optionsPage.clickOnTestngOption();
 
-    Assert.assertEquals(optionsPage.getTestngOptionText(), "TestNG");
+    Assertions.assertEquals(optionsPage.getTestngOptionText(), "TestNG");
   }
 
   @Test
@@ -63,7 +66,7 @@ public class OptionsTests extends BaseTest {
     optionsPage.implicitWait(timeout);
     optionsPage.clickOnGreenRadioButton();
 
-    Assert.assertEquals(optionsPage.getGreenRadioButtonValue(), "green");
+    Assertions.assertEquals(optionsPage.getGreenRadioButtonValue(), "green");
   }
 
   @Test
@@ -79,7 +82,7 @@ public class OptionsTests extends BaseTest {
     optionsPage.clickOnSecondOptionCheckbox();
     optionsPage.clickOnThirdOptionCheckbox();
 
-    Assert.assertTrue(optionsPage.isSelectedFirstOptionCheckbox() &&
+    Assertions.assertTrue(optionsPage.isSelectedFirstOptionCheckbox() &&
             optionsPage.isSelectedSecondOptionCheckbox() && optionsPage.isNotSelectedThirdOptionCheckbox());
   }
 }

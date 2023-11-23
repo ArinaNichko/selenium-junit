@@ -7,11 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static base.BaseTest.timeout;
 
 @Slf4j
 public class BasePage {
@@ -19,6 +17,7 @@ public class BasePage {
   protected final WebDriverWait WAIT;
   protected JavascriptExecutor javascriptExecutor;
   protected WebDriver driver;
+  protected static final Duration timeout = Duration.ofDays(15);
 
   protected BasePage(WebDriver driver) {
     this.driver = driver;
@@ -53,6 +52,6 @@ public class BasePage {
 
   public void implicitWait(long TIMEOUT) {
     log.info("Setting implicit wait to {} seconds", TIMEOUT);
-    driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(timeout);
   }
 }
