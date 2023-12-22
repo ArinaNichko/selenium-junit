@@ -13,8 +13,13 @@ import pages.ActionsPage;
 import pages.HomePage;
 import pages.LoginPortalPage;
 import pages.OptionsPage;
+import webDriverFactory.driver.DriverProvider;
 
 import java.util.List;
+
+import static utils.Constants.FIRST;
+import static utils.Constants.TIMEOUT;
+import static utils.EnvironmentContext.baseUrl;
 
 public class DefinitionSteps {
   private final CucumberContext context;
@@ -40,11 +45,12 @@ public class DefinitionSteps {
   @After
   public void tearDown() {
     context.driver.quit();
+    DriverProvider.removeInstance();
   }
 
   @Given("User opens Home page")
   public void openHomePage() {
-    homePage.openHomePage(context.baseUrl);
+    homePage.openHomePage(baseUrl);
   }
 
   @When("User clicks on the login portal link")
@@ -55,12 +61,12 @@ public class DefinitionSteps {
   @And("User switches to another tab")
   public void switchToAnotherTab() {
     List<String> tabsList = homePage.tabsList();
-    homePage.switchToTab(tabsList.get(context.FIRST));
+    homePage.switchToTab(tabsList.get(FIRST));
   }
 
   @And("^User logs in with name - \"([A-Za-z]+)\", password - \"(.{8,})\"$")
   public void logIn(String username, String password) {
-    loginPortalPage.implicitWait(context.timeout);
+    loginPortalPage.implicitWait(TIMEOUT);
     loginPortalPage.loginWithDefaultUser(username, password);
   }
 
@@ -83,7 +89,7 @@ public class DefinitionSteps {
 
   @When("User moves element to container")
   public void moveElementToContainer() {
-    actionsPage.implicitWait(context.timeout);
+    actionsPage.implicitWait(TIMEOUT);
     actionsPage.moveElementToContainer();
   }
 
@@ -94,7 +100,7 @@ public class DefinitionSteps {
 
   @When("User performs double click")
   public void performDoubleClick() {
-    actionsPage.implicitWait(context.timeout);
+    actionsPage.implicitWait(TIMEOUT);
     actionsPage.performDoubleClick();
   }
 
@@ -105,7 +111,7 @@ public class DefinitionSteps {
 
   @When("User clicks and holds on the box")
   public void clickAndHoldOnTheBox() {
-    actionsPage.implicitWait(context.timeout);
+    actionsPage.implicitWait(TIMEOUT);
     actionsPage.clickAndHold();
   }
 
@@ -121,7 +127,7 @@ public class DefinitionSteps {
 
   @And("Users select the {string} option")
   public void selectOption(String selectOption) {
-    optionsPage.implicitWait(context.timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.selectOption(selectOption);
   }
 
@@ -132,7 +138,7 @@ public class DefinitionSteps {
 
   @And("User clicks on the Green radio button")
   public void clickOnTheGreenRadioButton() {
-    optionsPage.implicitWait(context.timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.clickOnGreenRadioButton();
   }
 
@@ -143,7 +149,7 @@ public class DefinitionSteps {
 
   @And("User selects the first, second option checkboxes")
   public void selectOptionCheckboxes() {
-    optionsPage.implicitWait(context.timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.clickOnFirstOptionCheckbox();
     optionsPage.clickOnSecondOptionCheckbox();
     optionsPage.clickOnThirdOptionCheckbox();

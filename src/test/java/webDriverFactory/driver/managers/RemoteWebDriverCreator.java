@@ -1,4 +1,4 @@
-package webDriverFactory;
+package webDriverFactory.driver.managers;
 
 import exceptions.TestExecutionException;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RemoteWebDriverCreator implements WebDriverCreator{
+public class RemoteWebDriverCreator extends WebDriverCreator{
   private final String BROWSER;
   private final String HUB_URL;
 
