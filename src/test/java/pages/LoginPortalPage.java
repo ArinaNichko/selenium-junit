@@ -10,6 +10,8 @@ import userDecorator.User;
 import userDecorator.UserWithAutoPasswordDecorator;
 import userDecorator.UserWithEncodedPasswordDecorator;
 
+import static utils.Constants.JS_CLICK_SCRIPT;
+
 @Slf4j
 public class LoginPortalPage extends BasePage {
   @FindBy(css = "#text")
