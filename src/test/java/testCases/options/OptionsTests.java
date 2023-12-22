@@ -8,18 +8,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import pages.HomePage;
 import pages.OptionsPage;
 
 import java.util.List;
 
+import static utils.Constants.*;
+import static utils.EnvironmentContext.baseUrl;
+
 @ExtendWith(ReportPortalExtension.class)
 public class OptionsTests extends BaseTest {
   private static OptionsPage optionsPage;
-  private final String DROPDOWN_TEST_DATA = "/testData/dropdownMenuTestData.csv";
+  private static HomePage homePage;
 
   @BeforeEach
   public void setOptionsPage() {
     optionsPage = pageFactoryManager.getPage(OptionsPage.class);
+    homePage = pageFactoryManager.getPage(HomePage.class);
   }
 
   @ParameterizedTest
@@ -31,7 +36,7 @@ public class OptionsTests extends BaseTest {
     List<String> newTab = homePage.tabsList();
     homePage.switchToTab(newTab.get(FIRST));
 
-    optionsPage.implicitWait(timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.selectOption(option);
 
     Assertions.assertEquals(optionsPage.getSelectedOptionText(), expectedResult);
@@ -46,7 +51,7 @@ public class OptionsTests extends BaseTest {
     List<String> newTab = homePage.tabsList();
     homePage.switchToTab(newTab.get(FIRST));
 
-    optionsPage.implicitWait(timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.clickOnEclipseDropdownMenu();
 
     optionsPage.waitVisibilityOfTestngOption();
@@ -63,7 +68,7 @@ public class OptionsTests extends BaseTest {
     List<String> newTab = homePage.tabsList();
     homePage.switchToTab(newTab.get(FIRST));
 
-    optionsPage.implicitWait(timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.clickOnGreenRadioButton();
 
     Assertions.assertEquals(optionsPage.getGreenRadioButtonValue(), "green");
@@ -77,7 +82,7 @@ public class OptionsTests extends BaseTest {
     List<String> newTab = homePage.tabsList();
     homePage.switchToTab(newTab.get(FIRST));
 
-    optionsPage.implicitWait(timeout);
+    optionsPage.implicitWait(TIMEOUT);
     optionsPage.clickOnFirstOptionCheckbox();
     optionsPage.clickOnSecondOptionCheckbox();
     optionsPage.clickOnThirdOptionCheckbox();

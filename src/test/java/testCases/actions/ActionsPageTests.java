@@ -1,5 +1,6 @@
 package testCases.actions;
 
+import base.BaseTest;
 import com.epam.reportportal.junit5.ReportPortalExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,18 +10,24 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.ValueSource;
 import pages.ActionsPage;
-import base.BaseTest;
+import pages.HomePage;
 import utils.ColorDateConverter;
 
 import java.util.List;
 
+import static utils.Constants.FIRST;
+import static utils.Constants.TIMEOUT;
+import static utils.EnvironmentContext.baseUrl;
+
 @ExtendWith(ReportPortalExtension.class)
 public class ActionsPageTests extends BaseTest {
     private static ActionsPage actionsPage;
+    private static HomePage homePage;
 
     @BeforeEach
     public void setActionsPage() {
         actionsPage = pageFactoryManager.getPage(ActionsPage.class);
+        homePage = pageFactoryManager.getPage(HomePage.class);
     }
 
     @Test
@@ -31,7 +38,7 @@ public class ActionsPageTests extends BaseTest {
         List<String> tabsList = homePage.tabsList();
         homePage.switchToTab(tabsList.get(FIRST));
 
-        actionsPage.implicitWait(timeout);
+        actionsPage.implicitWait(TIMEOUT);
         actionsPage.moveElementToContainer();
 
         Assertions.assertTrue(actionsPage.getDroppableContainerText().contains("Dropped!"));
@@ -46,7 +53,7 @@ public class ActionsPageTests extends BaseTest {
         List<String> tabsList = homePage.tabsList();
         homePage.switchToTab(tabsList.get(FIRST));
 
-        actionsPage.implicitWait(timeout);
+        actionsPage.implicitWait(TIMEOUT);
         actionsPage.performDoubleClick();
         Assertions.assertEquals(actionsPage.getDoubleClickableItemColor(), expectedColor);
     }
@@ -60,7 +67,7 @@ public class ActionsPageTests extends BaseTest {
         List<String> tabsList = homePage.tabsList();
         homePage.switchToTab(tabsList.get(FIRST));
 
-        actionsPage.implicitWait(timeout);
+        actionsPage.implicitWait(TIMEOUT);
         actionsPage.clickAndHold();
 
         Assertions.assertEquals(actionsPage.getClickableBoxColor(), expectedColor);

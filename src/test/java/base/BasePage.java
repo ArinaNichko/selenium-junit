@@ -11,17 +11,17 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.Constants.TIMEOUT;
+
 @Slf4j
 public class BasePage {
-  protected static final String JS_CLICK_SCRIPT = "arguments[0].click();";
   protected final WebDriverWait WAIT;
   protected JavascriptExecutor javascriptExecutor;
   protected WebDriver driver;
-  protected static final Duration timeout = Duration.ofDays(15);
 
   protected BasePage(WebDriver driver) {
     this.driver = driver;
-    WAIT = new WebDriverWait(driver, timeout);
+    WAIT = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT));
     javascriptExecutor = (JavascriptExecutor) driver;
     PageFactory.initElements(driver, this);
   }
@@ -52,6 +52,6 @@ public class BasePage {
 
   public void implicitWait(long TIMEOUT) {
     log.info("Setting implicit wait to {} seconds", TIMEOUT);
-    driver.manage().timeouts().implicitlyWait(timeout);
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT));
   }
 }
