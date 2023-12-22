@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static utils.Constants.JS_CLICK_SCRIPT;
+
 @Slf4j
 public class PopupAndAlertsPage extends BasePage {
   @FindBy(xpath = "//*[@id=\"button1\"]")

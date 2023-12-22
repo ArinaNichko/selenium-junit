@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Actions Suite" parallel="classes">
-    <suite-files>
-        <suite-file path="actionsSuite.xml"/>
-        <suite-file path="loginPortalSuite.xml"/>
-        <suite-file path="popupAndAlertsSuite.xml"/>
-    </suite-files>
-</suite>

@@ -1,18 +1,27 @@
 package testCases.popupAndAlert;
 
-import org.openqa.selenium.Alert;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.PopupAndAlertsPage;
 import base.BaseTest;
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.Alert;
+import pages.HomePage;
+import pages.PopupAndAlertsPage;
 
 import java.util.List;
 
+import static utils.Constants.FIRST;
+import static utils.Constants.TIMEOUT;
+import static utils.EnvironmentContext.baseUrl;
+
+@ExtendWith(ReportPortalExtension.class)
 public class PopupAndAlertsTests extends BaseTest {
   private static PopupAndAlertsPage popupAndAlertsPage;
+  private static HomePage homePage;
 
-  @BeforeMethod
+  @BeforeEach
   public void setPopupAndAlertsPage() {
     popupAndAlertsPage = pageFactoryManager.getPage(PopupAndAlertsPage.class);
   }
@@ -25,7 +34,7 @@ public class PopupAndAlertsTests extends BaseTest {
     List<String> tabsList = homePage.tabsList();
     homePage.switchToTab(tabsList.get(FIRST));
 
-    popupAndAlertsPage.implicitWait(timeout);
+    popupAndAlertsPage.implicitWait(TIMEOUT);
     popupAndAlertsPage.clickOnAlertButton();
 
     Alert alert = popupAndAlertsPage.switchToAlert();
@@ -33,7 +42,7 @@ public class PopupAndAlertsTests extends BaseTest {
 
     popupAndAlertsPage.acceptAlert(alert);
 
-    Assert.assertEquals(getAlertMessage, "I am an alert box!");
+    Assertions.assertEquals(getAlertMessage, "I am an alert box!");
   }
 
   @Test
@@ -44,7 +53,7 @@ public class PopupAndAlertsTests extends BaseTest {
     List<String> tabsList = homePage.tabsList();
     homePage.switchToTab(tabsList.get(FIRST));
 
-    popupAndAlertsPage.implicitWait(timeout);
+    popupAndAlertsPage.implicitWait(TIMEOUT);
     popupAndAlertsPage.clickOnPopupButton();
 
     popupAndAlertsPage.waitVisibilityOfPopup();
@@ -52,7 +61,7 @@ public class PopupAndAlertsTests extends BaseTest {
 
     popupAndAlertsPage.clickOnClosePopupButton();
 
-    Assert.assertEquals(popupTitle,
+    Assertions.assertEquals(popupTitle,
             "It’s that Easy!! Well I think it is.....");
   }
 }
