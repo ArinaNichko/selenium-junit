@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static utils.Constants.JS_CLICK_SCRIPT;
+
 @Slf4j
 public class HomePage extends BasePage {
   @FindBy(id = "dropdown-checkboxes-radiobuttons")

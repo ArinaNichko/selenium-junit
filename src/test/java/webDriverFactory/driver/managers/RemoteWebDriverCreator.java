@@ -1,14 +1,17 @@
-package webDriverFactory;
+package webDriverFactory.driver.managers;
 
 import exceptions.TestExecutionException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RemoteWebDriverCreator implements WebDriverCreator{
+public class RemoteWebDriverCreator extends WebDriverCreator{
   private final String BROWSER;
   private final String HUB_URL;
 
@@ -27,11 +30,21 @@ public class RemoteWebDriverCreator implements WebDriverCreator{
   }
 
   private DesiredCapabilities getDesiredCapabilities(String browser) {
-    return switch (browser.toLowerCase()) {
-      case "chrome" -> DesiredCapabilities.chrome();
-      case "firefox" -> DesiredCapabilities.firefox();
-      case "edge" -> DesiredCapabilities.edge();
+    switch (browser.toLowerCase()) {
+      case "chrome" -> {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        return new DesiredCapabilities().merge(chromeOptions);
+      }
+      case "firefox" -> {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        return new DesiredCapabilities().merge(firefoxOptions);
+      }
+      case "edge" -> {
+        EdgeOptions edgeOptions = new EdgeOptions();
+        return new DesiredCapabilities().merge(edgeOptions);
+      }
       default -> new DesiredCapabilities();
-    };
+    }
+    return new DesiredCapabilities();
   }
 }

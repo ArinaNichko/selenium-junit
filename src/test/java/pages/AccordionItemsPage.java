@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class AccordionItemsPage extends BasePage {
   @FindBy(id = "hidden-text")
   private WebElement loadItem;
+
   @FindBy(id = "click-accordion")
   private WebElement keepClickingItem;
 
